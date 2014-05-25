@@ -63,6 +63,7 @@
     <Compile Include="BusinessServiceWithAutofixtureTests.cs" />
     <Compile Include="BusinessServiceWithAutofixtureAndAutoMoqTests.cs" />
     <Compile Include="BusinessServiceWithoutAutofixtureTests.cs" />
+    <Compile Include="ExtendingAutoFixtureTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
-using ServiceUnderTest.Model;
-using ServiceUnderTest.Services;
+using BusinessService.Model;
+using BusinessService.Services;
 
 #region Model
-namespace ServiceUnderTest.Model
+namespace BusinessService.Model
 {
     public class Input
     {
@@ -30,7 +30,7 @@ namespace ServiceUnderTest.Model
 #endregion
 
 #region Services
-namespace ServiceUnderTest.Services
+namespace BusinessService.Services
 {
     public interface IAdditionService
     {
@@ -62,7 +62,7 @@ namespace ServiceUnderTest.Services
 #endregion
 
 #region DependencyInjection
-namespace ServiceUnderTest.DependencyInjection
+namespace BusinessService.DependencyInjection
 {
     public class BusinessModule : Module
     {
@@ -71,26 +71,26 @@ namespace ServiceUnderTest.DependencyInjection
             base.Load(builder);
             builder.RegisterType<AdditionService>().As<IAdditionService>();
             builder.RegisterType<MultiplicationService>().As<IMultiplicationService>();
-            builder.RegisterType<BusinessService>().As<IBusinessService>();
+            builder.RegisterType<CalculationService>().As<ICalculationService>();
         }
     }
 }
 #endregion
 
 #region ServiceUnderTest
-namespace ServiceUnderTest
+namespace BusinessService
 {
-    public interface IBusinessService
+    public interface ICalculationService
     {
         Output ProcessInput(Input input);
     }
 
-    public class BusinessService : IBusinessService
+    public class CalculationService : ICalculationService
     {
         private readonly IAdditionService _additionService;
         private readonly IMultiplicationService _multiplicationService;
 
-        public BusinessService(IAdditionService additionService, IMultiplicationService multiplicationService)
+        public CalculationService(IAdditionService additionService, IMultiplicationService multiplicationService)
         {
             _additionService = additionService;
             _multiplicationService = multiplicationService;

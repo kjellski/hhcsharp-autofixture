@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using BusinessService;
+using BusinessService.Model;
+using BusinessService.Services;
 using Moq;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
-using ServiceUnderTest;
-using ServiceUnderTest.Model;
-using ServiceUnderTest.Services;
 
 namespace BusinessServiceTests
 {
@@ -29,8 +29,8 @@ namespace BusinessServiceTests
             // arrange
             // act
             // assert
-            BusinessService sut = null;
-            Assert.DoesNotThrow(() => sut = new BusinessService(_additionServiceMock.Object, _multiplicationServiceMock.Object));
+            CalculationService sut = null;
+            Assert.DoesNotThrow(() => sut = new CalculationService(_additionServiceMock.Object, _multiplicationServiceMock.Object));
             Assert.That(sut, Is.Not.Null);
         }
 
@@ -39,7 +39,7 @@ namespace BusinessServiceTests
         {
             // arrange
             // could go into setup, but not when you need to setup the mocked dependencies in any special way
-            var sut = new BusinessService(_additionServiceMock.Object, _multiplicationServiceMock.Object);
+            var sut = new CalculationService(_additionServiceMock.Object, _multiplicationServiceMock.Object);
 
             // act
             var result = sut.ProcessInput(_fixture.Create<Input>()); // not even interested in result!
@@ -53,7 +53,7 @@ namespace BusinessServiceTests
         {
             // arrange
             // could go into setup, but not when you need to setup the mocked dependencies in any special way
-            var sut = new BusinessService(_additionServiceMock.Object, _multiplicationServiceMock.Object);
+            var sut = new CalculationService(_additionServiceMock.Object, _multiplicationServiceMock.Object);
 
             // act
             var result = sut.ProcessInput(_fixture.Create<Input>()); // not even interested in result!
