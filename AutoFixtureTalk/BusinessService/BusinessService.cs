@@ -13,7 +13,7 @@ namespace ServiceUnderTest.Model
         public List<int> Operands { get; set; }
 
         public String AssertPresence { get; set; }
-        public bool HasToBeTrue { get; set; }
+        public DontBeNull DontBeNull { get; set; }
 
         public String NotRelevantForThisTest01 { get; set; }
         public String NotRelevantForThisTest02 { get; set; }
@@ -24,6 +24,8 @@ namespace ServiceUnderTest.Model
         public int Sum { get; set; }
         public int Product { get; set; }
     }
+
+    public class DontBeNull { }
 }
 #endregion
 
@@ -32,12 +34,12 @@ namespace ServiceUnderTest.Services
 {
     public interface IAdditionService
     {
-        int Sum(IEnumerable<int> operands);
+        int Add(IEnumerable<int> operands);
     }
 
     public class AdditionService : IAdditionService
     {
-        public int Sum(IEnumerable<int> operands)
+        public int Add(IEnumerable<int> operands)
         {
             return operands.Aggregate(0, (ints, i) => ints + i);
         }
@@ -46,12 +48,12 @@ namespace ServiceUnderTest.Services
 
     public interface IMultiplicationService
     {
-        int Product(List<int> operands);
+        int Multiply(IEnumerable<int> operands);
     }
 
     public class MultiplicationService : IMultiplicationService
     {
-        public int Product(List<int> operands)
+        public int Multiply(IEnumerable<int> operands)
         {
             return operands.Aggregate(1, (ints, i) => ints*i);
         }
@@ -99,13 +101,13 @@ namespace ServiceUnderTest
             if (String.IsNullOrEmpty(input.AssertPresence))
                 throw new ArgumentException("input.AssertPresence might not be null or Empty.");
 
-            if (!input.HasToBeTrue)
-                throw new ArgumentException("input.HasToBeTrue has to be true.");
+            if (input.DontBeNull == null)
+                throw new ArgumentException("input.DontBeNull has to be set.");
 
             var result = new Output
             {
-                Sum = _additionService.Sum(input.Operands),
-                Product = _multiplicationService.Product(input.Operands)
+                Sum = _additionService.Add(input.Operands),
+                Product = _multiplicationService.Multiply(input.Operands)
             };
 
             return result;
