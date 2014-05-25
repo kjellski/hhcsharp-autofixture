@@ -7,8 +7,8 @@
     <ProjectGuid>{BF11B76E-5F37-404D-A6A8-B0F18F6C88B1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ServiceUnderTest</RootNamespace>
-    <AssemblyName>ServiceUnderTest</AssemblyName>
+    <RootNamespace>BusinessService</RootNamespace>
+    <AssemblyName>BusinessService</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

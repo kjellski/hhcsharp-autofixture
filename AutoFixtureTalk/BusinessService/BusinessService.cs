@@ -75,7 +75,7 @@ namespace ServiceUnderTest.DependencyInjection
 }
 #endregion
 
-#region SUT
+#region ServiceUnderTest
 namespace ServiceUnderTest
 {
     public interface IBusinessService
@@ -102,9 +102,11 @@ namespace ServiceUnderTest
             if (!input.HasToBeTrue)
                 throw new ArgumentException("input.HasToBeTrue has to be true.");
 
-            var result = new Output();
-            result.Sum = _additionService.Sum(input.Operands);
-            result.Product = _multiplicationService.Product(input.Operands);
+            var result = new Output
+            {
+                Sum = _additionService.Sum(input.Operands),
+                Product = _multiplicationService.Product(input.Operands)
+            };
 
             return result;
         }
