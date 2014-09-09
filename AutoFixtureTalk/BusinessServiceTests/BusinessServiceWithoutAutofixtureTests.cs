@@ -24,11 +24,14 @@ namespace BusinessServiceTests
         public void BusinessServiceTest()
         {
             // arrange
+            CalculationService sut = null;
+
             // act
             // assert
-            CalculationService sut = null;
-            Assert.DoesNotThrow(
-                () => sut = new CalculationService(_additionServiceMock.Object, _multiplicationServiceMock.Object));
+            Assert.That(
+                () => sut = new CalculationService(_additionServiceMock.Object, _multiplicationServiceMock.Object),
+                Throws.Nothing);
+
             Assert.That(sut, Is.Not.Null);
         }
 
